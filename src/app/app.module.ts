@@ -2,17 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { LandscapeComponent } from './board/components/landscape/landscape.component';
-import { PlayerPanelComponent } from './board/components/player-panel/player-panel.component';
+import { BoardModule } from "./board/board.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LandscapeComponent,
-    PlayerPanelComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BoardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

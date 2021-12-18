@@ -1,6 +1,6 @@
 export interface IGameData {
     gameRunning: boolean,
     gameOver: boolean,
-    squares: [],
+    squares: any[],
     score: number
 }

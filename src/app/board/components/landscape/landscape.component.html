@@ -1,1 +1,8 @@
-<p>landscape works!</p>
+<div class="landscape-table">
+    <app-square *ngFor="let square of squares; index as i"
+                [isRobotHere]="checkRobotPosition(i, robotPosition)"
+                [isFossilHere]="checkFossilPosition(i, fossilPosition)"
+                [robotSprite]="robotSprite"
+                [fossilSprite]="fossilSprite">
+    </app-square>
+</div>

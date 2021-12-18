@@ -1,0 +1,12 @@
+.single-square {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .robot-image {
+    max-width: 90px;
+  }
+}
