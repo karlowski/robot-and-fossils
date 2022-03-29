@@ -1,7 +1,13 @@
 <div class="single-square">
-  <img *ngIf="isRobotHere"
+  <img *ngIf="isRobot"
        [src]="robotSprite"
-       class="robot-image"/>
+       class="robot-image"
+       [ngClass]="{
+            up: robotDirection === 'up',
+            down: robotDirection === 'down',
+            right: robotDirection === 'right',
+            left: robotDirection === 'left'
+       }"/>
   <img *ngIf="isFossilHere"
        [src]="fossilSprite"
        class="fossil-image"/>

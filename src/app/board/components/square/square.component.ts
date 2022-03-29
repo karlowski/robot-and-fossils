@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-square',
@@ -9,15 +9,26 @@ export class SquareComponent implements OnInit {
 
   @Input() robotSprite?: string;
   @Input() robotDirection?: string;
-  @Input() isRobotHere?: boolean;
+  @Input() set isRobotHere(robot: boolean) {
+    this.isRobot = robot;
+
+    if (robot && this.isFossilHere) {
+      this.gainScore();
+    }
+  };
   @Input() fossilSprite?: string;
-  @Input() isFossilHere?: boolean;
+  @Input() isFossilHere?: any;
+
+  @Output() scoreGained = new EventEmitter<void>();
+
+  isRobot = false;
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.robotSprite);
-    console.log(this.fossilSprite);
+  ngOnInit(): void { }
+
+  gainScore(): void {
+    this.scoreGained.emit();
   }
 
 }
