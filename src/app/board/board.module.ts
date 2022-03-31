@@ -5,7 +5,6 @@ import { BoardComponent } from "./board.component";
 import { LandscapeComponent } from "./components/landscape/landscape.component";
 import { SquareComponent } from "./components/square/square.component";
 import { PlayerPanelComponent } from "./components/player-panel/player-panel.component";
-import { BoardService } from "./services/board.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { BoardService } from "./services/board.service";
   imports: [CommonModule],
   exports: [
     BoardComponent
-  ],
-  providers: [BoardService]
+  ]
 })
 export class BoardModule { }
