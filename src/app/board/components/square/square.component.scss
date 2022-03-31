@@ -8,5 +8,18 @@
 
   .robot-image {
     max-width: 90px;
+
+    &.up {
+      transform: rotate(180deg);
+    }
+    &.down {
+      transform: rotate(0deg);
+    }
+    &.right {
+      transform: rotate(-90deg);
+    }
+    &.left {
+      transform: rotate(90deg);
+    }
   }
 }
