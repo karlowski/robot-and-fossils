@@ -6,8 +6,6 @@ import { GameProperties } from "../models/initial-properties.enum";
 @Injectable({ providedIn: "root" })
 export class FossilService {
 
-  protected fossilSprite: string = GameProperties.fossilSprite;
-
   private fossilLocation_ = new BehaviorSubject<number>(GameProperties.initialFossilLocation);
   fossilLocation$ = this.fossilLocation_.asObservable();
 

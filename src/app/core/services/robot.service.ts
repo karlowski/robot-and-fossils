@@ -6,8 +6,6 @@ import { RobotProperties } from "../models/robot-preperties.enum";
 @Injectable({ providedIn: "root" })
 export class RobotService {
 
-  protected robotSprite: string = GameProperties.robotSprite;
-
   private _position = new BehaviorSubject<number>(GameProperties.initialRobotLocation);
   position$ = this._position.asObservable();
   
