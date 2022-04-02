@@ -61,6 +61,22 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  get timeLeft(): Observable<number> {
+    return this.gameService.timeLeft$;
+  }
+
+  get score(): Observable<number> {
+    return this.gameService.score$;
+  }
+
+  get isGameOn(): boolean {
+    return this.gameService.isGameRunning;
+  }
+
+  get isGameOver(): boolean {
+    return this.gameService.isGameOver;
+  }
+
   onTurnLeft(direction: any): void {
     this.gameService.updateRobotDirection(direction);
   }
@@ -73,6 +89,10 @@ export class BoardComponent implements OnInit {
     const isTurnedRight = true;
 
     this.gameService.updateRobotDirection(direction, isTurnedRight);
+  }
+
+  start(): void {
+    this.gameService.startNewRound();
   }
 
 }

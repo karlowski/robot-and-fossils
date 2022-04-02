@@ -6,5 +6,6 @@ export enum GameProperties {
   robotSprite = './assets/robot.gif',
   fossilSprite = './assets/fossil.gif',
   initialFossilLocation = 20,
-  fieldLength = 25
+  fieldLength = 25,
+  gameTick = 1000,
 }

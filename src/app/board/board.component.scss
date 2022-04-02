@@ -15,7 +15,18 @@
     margin: 0 auto;
     width: 600px;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     background-image: url(variables.$panelImage);
     background-size: 100% 100%;
+
+    .time-panel, .score-panel {
+      color: white;
+    }
+  }
+
+  .time {
+    color: white;
   }
 }
