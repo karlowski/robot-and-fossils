@@ -8,23 +8,9 @@ export class RobotService {
 
   private _position = new BehaviorSubject<number>(GameProperties.initialRobotLocation);
   position$ = this._position.asObservable();
-
+  
   private _direction = new BehaviorSubject<string>(GameProperties.initialRobotDirection);
   direction$ = this._direction.asObservable();
-
-  // private _position: number = GameProperties.initialRobotLocation;
-  // private _direction: string = GameProperties.initialRobotDirection;
-  protected robotSprite: string = GameProperties.robotSprite;
-
-  // public get position(): number {
-  //   return this._position;
-  // }
-  // public get direction(): string {
-  //   return this._direction;
-  // }
-  public get sprite(): string {
-    return this.robotSprite;
-  }
 
   newPosition(direction: string): void {
     const currentPosition = this._position.getValue();
@@ -86,12 +72,5 @@ export class RobotService {
     this._position.next(newPosition);
     this._direction.next(directionsList[newDirectionId]);
   }
-
-  // public updatePosition(newPosition: number): void {
-  //   this._direction = newPosition;
-  // }
-  // public updateDirection(newDirection: string): void {
-  //   this._direction = newDirection;
-  // }
 
 }

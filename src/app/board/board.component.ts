@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable, Subject, tap } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 
-import { BoardService } from './services/board.service';
-import { RobotService } from '../core/services/robot.service';
-import { RobotProperties } from '@app/core/models/robot-preperties.enum';
+import { GameService } from '../core/services/game.service';
 import { IGameData } from './interfaces/board.interface';
+import { GameProperties } from '@app/core/models/initial-properties.enum';
 
 @Component({
   selector: 'app-board',
@@ -13,15 +12,11 @@ import { IGameData } from './interfaces/board.interface';
 })
 export class BoardComponent implements OnInit {
 
-  destroy$ = new Subject<void>();
-
   robotPosition$: Observable<number>;
   robotDirection$: Observable<string>;
   fossilPosition$: Observable<number>;
   mainGameData$: Observable<IGameData>;
 
-  // robotPosition: number;
-  // robotDirection: string;
   fossilPosition: number = 0;
   squares: null[];
 
@@ -29,34 +24,30 @@ export class BoardComponent implements OnInit {
   fossilSpriteUrl: string;
 
   constructor(
-    private boardService: BoardService,
-    private robotService: RobotService
+    private gameService: GameService
   ) {
-    this.robotService.robotRandomizer();
-    this.boardService.updateFossil();
-    // this.robotPosition = robotService.position;
-    // this.robotDirection = robotService.direction;
-    // this.fossilPosition = boardService.fossil;
-    this.squares = boardService.squares;
-    this.robotSpriteUrl = robotService.sprite;
-    this.fossilSpriteUrl = boardService.sprite;
+    this.gameService.randomizeRobotEmplacement();
+    this.gameService.updateFossil();
+    this.squares = new Array(25);
+    this.robotSpriteUrl = GameProperties.robotSprite;
+    this.fossilSpriteUrl = GameProperties.fossilSprite;
 
-    this.robotPosition$ = this.robotService.position$;
-    this.robotDirection$ = this.robotService.direction$;
-    this.fossilPosition$ = this.boardService.fossilLocation$.pipe(
+    this.robotPosition$ = this.gameService.robotLocation;
+    this.robotDirection$ = this.gameService.robotDirection;
+    this.fossilPosition$ = this.gameService.fossilLocation.pipe(
       tap(position => this.fossilPosition = position)
     );
 
     this.mainGameData$ = combineLatest([
-      this.robotService.position$,
-      this.robotService.direction$
+      this.robotPosition$,
+      this.robotDirection$
     ]).pipe(
       map(gameData => {
         const [robotPosition, robotDirection] = gameData;
 
         if (robotPosition === this.fossilPosition) {
-          this.boardService.gainScore();
-          this.boardService.updateFossil(robotPosition);
+          this.gameService.updateScore();
+          this.gameService.updateFossil(robotPosition);
         }
         
         return {
@@ -70,18 +61,38 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  get timeLeft(): Observable<number> {
+    return this.gameService.timeLeft$;
+  }
+
+  get score(): Observable<number> {
+    return this.gameService.score$;
+  }
+
+  get isGameOn(): boolean {
+    return this.gameService.isGameRunning;
+  }
+
+  get isGameOver(): boolean {
+    return this.gameService.isGameOver;
+  }
+
   onTurnLeft(direction: any): void {
-    this.robotService.newDirection(direction);
+    this.gameService.updateRobotDirection(direction);
   }
 
   onMove(direction: any): void {
-    this.robotService.newPosition(direction);
+    this.gameService.updateRobotLocation(direction);
   }
 
   onTurnRight(direction: any): void {
     const isTurnedRight = true;
 
-    this.robotService.newDirection(direction, isTurnedRight);
+    this.gameService.updateRobotDirection(direction, isTurnedRight);
+  }
+
+  start(): void {
+    this.gameService.startNewRound();
   }
 
 }

@@ -9,9 +9,22 @@
       </app-square>
     </div>
     <div class="panel-wrapper">
-      <app-player-panel (turnedLeft)="onTurnLeft(gameState.robotDirection)" 
+      <div class="time-panel">
+        <p>{{ timeLeft | async }}</p>
+      </div>
+
+      <app-player-panel [timeLeft]="timeLeft"
+                        [isPlaying]="isGameOn"
+                        [isGameOver]="isGameOver"
+
+                        (turnedLeft)="onTurnLeft(gameState.robotDirection)" 
                         (moved)="onMove(gameState.robotDirection)" 
-                        (turnedRight)="onTurnRight(gameState.robotDirection)">
-    </app-player-panel>
+                        (turnedRight)="onTurnRight(gameState.robotDirection)"
+                        (started)="start()">
+      </app-player-panel>
+
+      <div class="score-panel">
+        <p>{{ score | async }}</p>
+      </div>
     </div>
 </div>
