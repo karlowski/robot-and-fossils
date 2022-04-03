@@ -10,7 +10,7 @@
     </div>
     <div class="panel-wrapper">
       <div class="time-panel">
-        <p>{{ timeLeft | async }}</p>
+        <p>{{ timeLeft | async | timing }}</p>
       </div>
 
       <app-player-panel [timeLeft]="timeLeft"
