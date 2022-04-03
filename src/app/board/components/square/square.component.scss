@@ -8,8 +8,18 @@
   justify-content: center;
   align-items: center;
 
+  @media screen and (max-width: variables.$mobile) {
+    border: 1px solid black;
+    width: 19vw;
+    height: 19vw;
+  }
+
   .robot-image {
     max-width: 90px;
+
+    @media screen and (max-width: variables.$mobile) {
+      max-width: 100%;
+    }
 
     &.up {
       transform: rotate(180deg);
@@ -27,7 +37,7 @@
 
   .fossil-image {
     @media screen and (max-width: variables.$mobile) {
-      width: 100%;
+      width: 60%;
     }
   }
 }

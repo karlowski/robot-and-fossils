@@ -1,4 +1,5 @@
-<div class="main-board" *ngIf="mainGameData$ | async as gameState">
+<div class="main-board-wrapper">
+  <div class="main-board" *ngIf="mainGameData$ | async as gameState">
     <div class="squares">
       <app-square *ngFor="let square of squares; index as i"
                   [isRobotHere]="gameState.robotPosition === i"
@@ -9,6 +10,11 @@
       </app-square>
     </div>
     <div class="panel-wrapper">
+      <div class="time-score-mobile">
+        <p>{{ timeLeft | async | timing }}</p>
+        <p>{{ score | async }}</p>
+      </div>
+
       <div class="time-panel">
         <p>{{ timeLeft | async | timing }}</p>
       </div>
@@ -27,4 +33,5 @@
         <p>{{ score | async }}</p>
       </div>
     </div>
+  </div>
 </div>
