@@ -11,8 +11,14 @@
     </div>
     <div class="panel-wrapper">
       <div class="time-score-mobile">
-        <p>{{ timeLeft | async | timing }}</p>
-        <p>{{ score | async }}</p>
+        <div>
+          <p>Time:</p>
+          <p>{{ timeLeft | async | timing }}</p>
+        </div>
+        <div>
+          <p>Score:</p>
+          <p>{{ score | async }}</p>
+        </div>
       </div>
 
       <div class="time-panel">
