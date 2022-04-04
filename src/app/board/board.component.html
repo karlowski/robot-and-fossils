@@ -22,6 +22,7 @@
       </div>
 
       <div class="time-panel">
+        <p *ngIf="!isGameOn">Time:</p>
         <p>{{ timeLeft | async | timing }}</p>
       </div>
 
@@ -36,6 +37,7 @@
       </app-player-panel>
 
       <div class="score-panel">
+        <p *ngIf="!isGameOn">Score:</p>
         <p>{{ score | async }}</p>
       </div>
     </div>

@@ -59,9 +59,16 @@
   
       .time-panel, .score-panel {
         color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         @media screen and (max-width: variables.$mobile) {
           display: none;
+        }
+
+        p {
+          margin: 5px;
         }
       }
     }
