@@ -67,7 +67,7 @@ export class RobotService {
   robotRandomizer(): void {
     const newPosition = Math.floor(Math.random() * 24);
     const directionsList = Object.values(RobotProperties);
-    const newDirectionId = Math.floor(Math.random() * 4) - 1;
+    const newDirectionId = Math.floor(Math.random() * 4);
 
     this._position.next(newPosition);
     this._direction.next(directionsList[newDirectionId]);
