@@ -8,12 +8,17 @@ export class RobotService {
 
   private _position = new BehaviorSubject<number>(GameProperties.initialRobotLocation);
   position$ = this._position.asObservable();
-  
+
   private _direction = new BehaviorSubject<string>(GameProperties.initialRobotDirection);
   direction$ = this._direction.asObservable();
 
-  newPosition(direction: string): void {
+  newPosition(direction: string, isCrashed?: boolean): void {
     const currentPosition = this._position.getValue();
+
+    if (isCrashed) {
+      this._position.next(100);
+      return;
+    }
 
     if (direction === RobotProperties.DirectionUp) {
       this._position.next(currentPosition - 5);

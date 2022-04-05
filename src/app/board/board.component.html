@@ -31,7 +31,7 @@
                         [isGameOver]="isGameOver"
 
                         (turnedLeft)="onTurnLeft(gameState.robotDirection)" 
-                        (moved)="onMove(gameState.robotDirection)" 
+                        (moved)="onMove(gameState.robotDirection, gameState.robotPosition)" 
                         (turnedRight)="onTurnRight(gameState.robotDirection)"
                         (started)="start()">
       </app-player-panel>
