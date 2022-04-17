@@ -1,11 +1,16 @@
 <div class="control-buttons-wrapper">
     <div class="buttons-panel" *ngIf="isPlaying">
-        <button class="control-button" (click)="turnLeft()">LEFT</button>
-        <button class="control-button" (click)="move()">FORWARD</button>
-        <button class="control-button" (click)="turnRight()">RIGHT</button>
+        <button class="control-button left" (click)="turnLeft()"></button>
+        <button class="control-button forward" (click)="move()"></button>
+        <button class="control-button right" (click)="turnRight()"></button>
     </div>
 
-    <div class="buttons-panel" *ngIf="!isPlaying">
+    <div class="buttons-panel" *ngIf="!isPlaying && !isGameOver">
         <button class="start-button" (click)="onStart()">START</button>
+    </div>
+
+    <div class="game-over-panel" *ngIf="!isPlaying && isGameOver">
+        <p>GAME OVER</p>
+        <button class="start-button" (click)="onStart()">AGAIN?</button>
     </div>
 </div>

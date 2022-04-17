@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, endWith, finalize, interval, map, Observable, skip, take, takeUntil, takeWhile, timer } from "rxjs";
+import { BehaviorSubject, finalize, map, Observable, takeWhile, timer } from "rxjs";
 
 import { GameProperties } from "../models/initial-properties.enum";
 import { FossilService } from "./fossil.service";
@@ -10,6 +10,7 @@ export class GameService {
 
   private _isGameRunning: boolean = false;
   private _isGameOver: boolean = false;
+  private _timer: any;
 
   private _score = new BehaviorSubject<number>(GameProperties.initialScore);
   score$ = this._score.asObservable();
@@ -18,16 +19,12 @@ export class GameService {
   timeLeft$ = this._timeLeft.asObservable();
 
   private timer = timer(0, GameProperties.gameTick).pipe(
-    takeWhile(() => !!this.currentTime || this._isGameOver),
+    takeWhile(() => !!this.currentTime && !this._isGameOver),
     map(() => {
       this.timerTick();
     }),
     finalize(() => {
-      this._isGameRunning = false;
-      this._isGameOver = true;
-      this._timeLeft.next(GameProperties.initialTime);
-
-      console.log('completed');
+      this.endRound();
     })
   );
 
@@ -52,6 +49,11 @@ export class GameService {
   startNewRound(): void {
     if (this.score) {
       this._score.next(GameProperties.initialScore);
+    }
+
+    if (this._isGameOver) {
+      this.randomizeRobotEmplacement();
+      this.fossilService.throwNewFossil();
     }
 
     this._isGameOver = false;
@@ -90,8 +92,26 @@ export class GameService {
     this.robotService.newDirection(direction, toRight);
   }
 
-  updateRobotLocation(direction: string): void {
-    this.robotService.newPosition(direction);
+  updateRobotLocation(direction: string, position: number): void {
+    const isRightCrash = (position === 4 || position === 9 || position === 14 || position === 19 || position === 24) && direction === 'right';
+    const isLeftCrash = (position === 0 || position === 5 || position === 10 || position === 15 || position === 20) && direction === 'left';
+    const isUpCrash = (position - 5) < 0 && direction === 'up';
+    const isDownCrash = (position + 5) > 24 && direction === 'down';
+
+    if (isRightCrash || isLeftCrash || isUpCrash || isDownCrash) {
+      this.robotService.newPosition(direction, true);
+      this.endRound();
+    } else {
+      this.robotService.newPosition(direction);
+    }
+  }
+
+  endRound(): void {
+    this._isGameRunning = false;
+    this._isGameOver = true;
+    this._timeLeft.next(GameProperties.initialTime);
+
+    console.log('completed');
   }
 
   randomizeRobotEmplacement(): void {
@@ -100,7 +120,9 @@ export class GameService {
 
   updateGameOver(gameOver: boolean) {
     this._isGameOver = gameOver;
+    this.isGameOver
   }
+
   updateGameRunning(gameRunning: boolean) {
     this._isGameRunning = gameRunning;
   }

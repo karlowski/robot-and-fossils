@@ -81,8 +81,8 @@ export class BoardComponent implements OnInit {
     this.gameService.updateRobotDirection(direction);
   }
 
-  onMove(direction: any): void {
-    this.gameService.updateRobotLocation(direction);
+  onMove(direction: any, position: number): void {
+    this.gameService.updateRobotLocation(direction, position);
   }
 
   onTurnRight(direction: any): void {
