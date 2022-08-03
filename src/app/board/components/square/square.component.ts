@@ -12,7 +12,7 @@ export class SquareComponent implements OnInit {
   @Input() set isRobotHere(robot: boolean) {
     this.isRobot = robot;
 
-    if (robot && this.isFossilHere) {
+    if (this.isRobot && this.isFossilHere) {
       this.gainScore();
     }
   };

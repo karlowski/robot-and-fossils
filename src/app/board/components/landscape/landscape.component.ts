@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GameProperties } from "@app/core/models/initial-properties.enum";
+import { InitialGameProperties } from "@app/core/models/initial-properties.enum";
 import { RobotService } from '@app/core/services/robot.service';
 import { Observable } from 'rxjs';
 
@@ -11,10 +11,10 @@ import { Observable } from 'rxjs';
 export class LandscapeComponent implements OnInit {
 
   @Input() squares: any[] | undefined;
-  @Input() robotPosition: number = GameProperties.initialRobotLocation;
+  @Input() robotPosition: number = InitialGameProperties.RobotLocation;
   @Input() robotSprite: string = '';
   @Input() fossilSprite: string = '';
-  @Input() fossilPosition: number = GameProperties.initialFossilLocation;
+  @Input() fossilPosition: number = InitialGameProperties.FossilLocation;
 
   robotPosition$: Observable<number>;
   robotDirection$: Observable<string>;

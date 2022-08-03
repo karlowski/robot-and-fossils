@@ -13,7 +13,7 @@
       <div class="time-score-mobile">
         <div>
           <p>Time:</p>
-          <p>{{ timeLeft | async | timing }}</p>
+          <p>{{ timeLeft | async | timer }}</p>
         </div>
         <div>
           <p>Score:</p>
@@ -23,15 +23,15 @@
 
       <div class="time-panel">
         <p *ngIf="!isGameOn">Time:</p>
-        <p>{{ timeLeft | async | timing }}</p>
+        <p>{{ timeLeft | async | timer }}</p>
       </div>
 
       <app-player-panel [timeLeft]="timeLeft"
                         [isPlaying]="isGameOn"
                         [isGameOver]="isGameOver"
 
-                        (turnedLeft)="onTurnLeft(gameState.robotDirection)" 
-                        (moved)="onMove(gameState.robotDirection, gameState.robotPosition)" 
+                        (turnedLeft)="onTurnLeft(gameState.robotDirection)"
+                        (moved)="onMove(gameState.robotDirection, gameState.robotPosition)"
                         (turnedRight)="onTurnRight(gameState.robotDirection)"
                         (started)="start()">
       </app-player-panel>

@@ -5,7 +5,7 @@ import { BoardComponent } from "./board.component";
 import { LandscapeComponent } from "./components/landscape/landscape.component";
 import { SquareComponent } from "./components/square/square.component";
 import { PlayerPanelComponent } from "./components/player-panel/player-panel.component";
-import { TimingPipe } from './pipes/timing.pipe';
+import { TimerPipe } from './pipes/timer.pipe';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { TimingPipe } from './pipes/timing.pipe';
     LandscapeComponent,
     SquareComponent,
     PlayerPanelComponent,
-    TimingPipe
+    TimerPipe
   ],
   imports: [CommonModule],
   exports: [

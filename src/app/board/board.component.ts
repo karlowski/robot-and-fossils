@@ -3,7 +3,7 @@ import { combineLatest, map, Observable, tap } from 'rxjs';
 
 import { GameService } from '../core/services/game.service';
 import { IGameData } from './interfaces/board.interface';
-import { GameProperties } from '@app/core/models/initial-properties.enum';
+import { InitialGameProperties } from '@app/core/models/initial-properties.enum';
 
 @Component({
   selector: 'app-board',
@@ -29,8 +29,8 @@ export class BoardComponent implements OnInit {
     this.gameService.randomizeRobotEmplacement();
     this.gameService.updateFossil();
     this.squares = new Array(25);
-    this.robotSpriteUrl = GameProperties.robotSprite;
-    this.fossilSpriteUrl = GameProperties.fossilSprite;
+    this.robotSpriteUrl = InitialGameProperties.RobotSprite;
+    this.fossilSpriteUrl = InitialGameProperties.FossilSprite;
 
     this.robotPosition$ = this.gameService.robotLocation;
     this.robotDirection$ = this.gameService.robotDirection;
@@ -49,7 +49,7 @@ export class BoardComponent implements OnInit {
           this.gameService.updateScore();
           this.gameService.updateFossil(robotPosition);
         }
-        
+
         return {
           robotPosition,
           robotDirection,
@@ -87,7 +87,6 @@ export class BoardComponent implements OnInit {
 
   onTurnRight(direction: any): void {
     const isTurnedRight = true;
-
     this.gameService.updateRobotDirection(direction, isTurnedRight);
   }
 

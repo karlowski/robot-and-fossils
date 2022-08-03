@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, finalize, map, Observable, takeWhile, timer } from "rxjs";
 
-import { GameProperties } from "../models/initial-properties.enum";
+import { InitialGameProperties } from "../models/initial-properties.enum";
 import { FossilService } from "./fossil.service";
 import { RobotService } from "./robot.service";
 
@@ -12,13 +12,13 @@ export class GameService {
   private _isGameOver: boolean = false;
   private _timer: any;
 
-  private _score = new BehaviorSubject<number>(GameProperties.initialScore);
+  private _score = new BehaviorSubject<number>(InitialGameProperties.Score);
   score$ = this._score.asObservable();
 
-  private _timeLeft = new BehaviorSubject<number>(GameProperties.initialTime);
+  private _timeLeft = new BehaviorSubject<number>(InitialGameProperties.Time);
   timeLeft$ = this._timeLeft.asObservable();
 
-  private timer = timer(0, GameProperties.gameTick).pipe(
+  private timer = timer(0, InitialGameProperties.Tick).pipe(
     takeWhile(() => !!this.currentTime && !this._isGameOver),
     map(() => {
       this.timerTick();
@@ -48,7 +48,7 @@ export class GameService {
 
   startNewRound(): void {
     if (this.score) {
-      this._score.next(GameProperties.initialScore);
+      this._score.next(InitialGameProperties.Score);
     }
 
     if (this._isGameOver) {
@@ -109,7 +109,7 @@ export class GameService {
   endRound(): void {
     this._isGameRunning = false;
     this._isGameOver = true;
-    this._timeLeft.next(GameProperties.initialTime);
+    this._timeLeft.next(InitialGameProperties.Time);
 
     console.log('completed');
   }

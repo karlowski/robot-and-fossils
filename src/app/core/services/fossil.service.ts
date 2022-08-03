@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
-import { GameProperties } from "../models/initial-properties.enum";
+import { InitialGameProperties } from "../models/initial-properties.enum";
 
 @Injectable({ providedIn: "root" })
 export class FossilService {
 
-  private fossilLocation_ = new BehaviorSubject<number>(GameProperties.initialFossilLocation);
+  private fossilLocation_ = new BehaviorSubject<number>(InitialGameProperties.FossilLocation);
   fossilLocation$ = this.fossilLocation_.asObservable();
 
   throwNewFossil(robotPosition?: number) {
@@ -16,10 +16,10 @@ export class FossilService {
   }
 
   calculateNewFossil(robotPosition?: number): number {
-    let newLocation = Math.floor(Math.random() * GameProperties.fieldLength);
+    let newLocation = Math.floor(Math.random() * InitialGameProperties.FieldLength);
 
     while (robotPosition && newLocation === robotPosition) {
-      newLocation = Math.floor(Math.random() * GameProperties.fieldLength);
+      newLocation = Math.floor(Math.random() * InitialGameProperties.FieldLength);
     }
 
     return newLocation;

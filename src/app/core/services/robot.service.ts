@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { GameProperties } from "../models/initial-properties.enum";
-import { RobotProperties } from "../models/robot-preperties.enum";
+import { InitialGameProperties } from "../models/initial-properties.enum";
+import { RobotDirections } from "../models/robot-directions.enum";
 
 @Injectable({ providedIn: "root" })
 export class RobotService {
 
-  private _position = new BehaviorSubject<number>(GameProperties.initialRobotLocation);
+  private _position = new BehaviorSubject<number>(InitialGameProperties.RobotLocation);
   position$ = this._position.asObservable();
 
-  private _direction = new BehaviorSubject<string>(GameProperties.initialRobotDirection);
+  private _direction = new BehaviorSubject<string>(InitialGameProperties.RobotDirection);
   direction$ = this._direction.asObservable();
 
   newPosition(direction: string, isCrashed?: boolean): void {
@@ -20,16 +20,16 @@ export class RobotService {
       return;
     }
 
-    if (direction === RobotProperties.DirectionUp) {
+    if (direction === RobotDirections.Up) {
       this._position.next(currentPosition - 5);
     }
-    if (direction === RobotProperties.DirectionDown) {
+    if (direction === RobotDirections.Down) {
       this._position.next(currentPosition + 5);
     }
-    if (direction === RobotProperties.DirectionLeft) {
+    if (direction === RobotDirections.Left) {
       this._position.next(currentPosition - 1);
     }
-    if (direction === RobotProperties.DirectionRight) {
+    if (direction === RobotDirections.Right) {
       this._position.next(currentPosition + 1);
     }
   }
@@ -38,32 +38,32 @@ export class RobotService {
 
     if (isTurnedRight) {
 
-      if (oldDirection === RobotProperties.DirectionUp) {
-        this._direction.next(RobotProperties.DirectionRight);
+      if (oldDirection === RobotDirections.Up) {
+        this._direction.next(RobotDirections.Right);
       }
-      if (oldDirection === RobotProperties.DirectionDown) {
-        this._direction.next(RobotProperties.DirectionLeft);
+      if (oldDirection === RobotDirections.Down) {
+        this._direction.next(RobotDirections.Left);
       }
-      if (oldDirection === RobotProperties.DirectionLeft) {
-        this._direction.next(RobotProperties.DirectionUp);
+      if (oldDirection === RobotDirections.Left) {
+        this._direction.next(RobotDirections.Up);
       }
-      if (oldDirection === RobotProperties.DirectionRight) {
-        this._direction.next(RobotProperties.DirectionDown);
+      if (oldDirection === RobotDirections.Right) {
+        this._direction.next(RobotDirections.Down);
       }
 
     } else {
 
-      if (oldDirection === RobotProperties.DirectionUp) {
-        this._direction.next(RobotProperties.DirectionLeft)
+      if (oldDirection === RobotDirections.Up) {
+        this._direction.next(RobotDirections.Left)
       }
-      if (oldDirection === RobotProperties.DirectionDown) {
-        this._direction.next(RobotProperties.DirectionRight)
+      if (oldDirection === RobotDirections.Down) {
+        this._direction.next(RobotDirections.Right)
       }
-      if (oldDirection === RobotProperties.DirectionLeft) {
-        this._direction.next(RobotProperties.DirectionDown)
+      if (oldDirection === RobotDirections.Left) {
+        this._direction.next(RobotDirections.Down)
       }
-      if (oldDirection === RobotProperties.DirectionRight) {
-        this._direction.next(RobotProperties.DirectionUp)
+      if (oldDirection === RobotDirections.Right) {
+        this._direction.next(RobotDirections.Up)
       }
 
     }
@@ -71,7 +71,7 @@ export class RobotService {
 
   robotRandomizer(): void {
     const newPosition = Math.floor(Math.random() * 24);
-    const directionsList = Object.values(RobotProperties);
+    const directionsList = Object.values(RobotDirections);
     const newDirectionId = Math.floor(Math.random() * 4);
 
     this._position.next(newPosition);
