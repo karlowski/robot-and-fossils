@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { InitialGameProperties } from "../models/initial-properties.enum";
-import { RobotDirections } from "../models/robot-directions.enum";
+import { InitialGameProperties } from "../enums/initial-properties.enum";
+import { RobotDirections } from "../enums/robot-directions.enum";
 
 @Injectable({ providedIn: "root" })
 export class RobotService {

@@ -1,32 +1,28 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, finalize, map, Observable, takeWhile, timer } from "rxjs";
 
-import { InitialGameProperties } from "../models/initial-properties.enum";
+import { InitialGameProperties } from "../enums/initial-properties.enum";
 import { FossilService } from "./fossil.service";
 import { RobotService } from "./robot.service";
+import {RobotDirections} from "@app/core/enums/robot-directions.enum";
 
 @Injectable({ providedIn: "root" })
 export class GameService {
 
-  private _isGameRunning: boolean = false;
-  private _isGameOver: boolean = false;
-  private _timer: any;
+  isGameRunning: boolean = false;
+  isGameOver: boolean = false;
+
+  timer: Observable<void> = timer(0, InitialGameProperties.Tick).pipe(
+    takeWhile(() => !!this.currentTime && !this.isGameOver),
+    map(() => this.timerTick()),
+    finalize(() => this.endRound())
+  );
 
   private _score = new BehaviorSubject<number>(InitialGameProperties.Score);
   score$ = this._score.asObservable();
 
   private _timeLeft = new BehaviorSubject<number>(InitialGameProperties.Time);
   timeLeft$ = this._timeLeft.asObservable();
-
-  private timer = timer(0, InitialGameProperties.Tick).pipe(
-    takeWhile(() => !!this.currentTime && !this._isGameOver),
-    map(() => {
-      this.timerTick();
-    }),
-    finalize(() => {
-      this.endRound();
-    })
-  );
 
   constructor(
     private robotService: RobotService,
@@ -35,12 +31,6 @@ export class GameService {
 
   get score(): number {
     return this._score.getValue();
-  }
-  get isGameOver(): boolean {
-    return this._isGameOver;
-  }
-  get isGameRunning(): boolean {
-    return this._isGameRunning;
   }
   get currentTime(): number {
     return this._timeLeft.getValue();
@@ -51,15 +41,14 @@ export class GameService {
       this._score.next(InitialGameProperties.Score);
     }
 
-    if (this._isGameOver) {
+    if (this.isGameOver) {
       this.randomizeRobotEmplacement();
       this.fossilService.throwNewFossil();
     }
 
-    this._isGameOver = false;
-    this._isGameRunning = true;
+    this.isGameOver = false;
+    this.isGameRunning = true;
     this.timer.subscribe();
-    console.log('started');
   }
 
   get fossilLocation(): Observable<number> {
@@ -80,7 +69,6 @@ export class GameService {
 
   updateScore(): void {
     const currentScore = this._score.getValue();
-
     this.gainScorePoint(currentScore + 1);
   }
 
@@ -88,13 +76,13 @@ export class GameService {
     this.fossilService.throwNewFossil(robotPosition);
   }
 
-  updateRobotDirection(direction: string, toRight?: boolean): void {
+  updateRobotDirection(direction: string, toRight: boolean = false): void {
     this.robotService.newDirection(direction, toRight);
   }
 
   updateRobotLocation(direction: string, position: number): void {
-    const isRightCrash = (position === 4 || position === 9 || position === 14 || position === 19 || position === 24) && direction === 'right';
-    const isLeftCrash = (position === 0 || position === 5 || position === 10 || position === 15 || position === 20) && direction === 'left';
+    const isRightCrash = (position === 4 || position === 9 || position === 14 || position === 19 || position === 24) && direction === RobotDirections.Right;
+    const isLeftCrash = (position === 0 || position === 5 || position === 10 || position === 15 || position === 20) && direction === RobotDirections.Left;
     const isUpCrash = (position - 5) < 0 && direction === 'up';
     const isDownCrash = (position + 5) > 24 && direction === 'down';
 
@@ -107,29 +95,17 @@ export class GameService {
   }
 
   endRound(): void {
-    this._isGameRunning = false;
-    this._isGameOver = true;
+    this.isGameRunning = false;
+    this.isGameOver = true;
     this._timeLeft.next(InitialGameProperties.Time);
-
-    console.log('completed');
   }
 
   randomizeRobotEmplacement(): void {
     this.robotService.robotRandomizer();
   }
 
-  updateGameOver(gameOver: boolean) {
-    this._isGameOver = gameOver;
-    this.isGameOver
-  }
-
-  updateGameRunning(gameRunning: boolean) {
-    this._isGameRunning = gameRunning;
-  }
-
   timerTick(): void {
     const currentTimeLeft = this._timeLeft.getValue();
-
     this._timeLeft.next(currentTimeLeft - 1);
   }
 

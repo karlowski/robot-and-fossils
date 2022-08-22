@@ -1,9 +1,0 @@
-@use "src/variables";
-
-.landscape-table {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  width: 500px;
-  background-image: variables.$landscapeImage;
-  background-size: cover;
-}

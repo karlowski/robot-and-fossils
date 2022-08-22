@@ -1,5 +1,5 @@
 <div class="main-board-wrapper">
-  <div class="main-board" *ngIf="mainGameData$ | async as gameState">
+  <div class="main-board" *ngIf="gameData$ | async as gameState">
     <div class="squares">
       <app-square *ngFor="let square of squares; index as i"
                   [isRobotHere]="gameState.robotPosition === i"
