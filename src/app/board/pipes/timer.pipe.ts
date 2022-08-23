@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'timing'
+  name: 'timer'
 })
-export class TimingPipe implements PipeTransform {
+export class TimerPipe implements PipeTransform {
 
   transform(value: any): string {
     const isGameOff = value === 60;
@@ -11,7 +11,7 @@ export class TimingPipe implements PipeTransform {
 
     if (isGameOff) {
       return '00';
-    } 
+    }
     if (isLastSeconds) {
       return `0${value}`;
     }

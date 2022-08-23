@@ -7,4 +7,4 @@ import { GameService } from "./services/game.service";
     imports: [],
     providers: [GameService]
   })
-  export class CoreModule { }
+export class CoreModule { }
