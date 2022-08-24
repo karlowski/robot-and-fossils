@@ -8,14 +8,14 @@
                    [robotState]="robotState"
                    [fossilPosition]="fossilPosition$ | async">
     </rbt-landscape>
-    <rbt-player-panel [timeLeft]="timeLeft"
-                      [isPlaying]="isGameOn"
-                      [isGameOver]="isGameOver"
+    <rbt-controls-panel [timeLeft]="timeLeft"
+                        [isPlaying]="isGameOn"
+                        [isGameOver]="isGameOver"
 
-                      (turnedLeft)="onTurnLeft(robotState.robotDirection)"
-                      (moved)="onMove(robotState.robotDirection, robotState.robotPosition)"
-                      (turnedRight)="onTurnRight(robotState.robotDirection)"
-                      (started)="start()">
-    </rbt-player-panel>
+                        (turnedLeft)="onTurnLeft(robotState.direction)"
+                        (moved)="onMove(robotState.direction, robotState.position)"
+                        (turnedRight)="onTurnRight(robotState.direction)"
+                        (started)="start()">
+    </rbt-controls-panel>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { combineLatest, map, Observable, tap } from 'rxjs';
 
 import { GameService } from '../core/services/game.service';
-import { GameData } from './interfaces/board.interface';
+import { RobotData } from './interfaces/robot.interface';
 import { InitialGameProperties } from '@app/core/enums/initial-properties.enum';
 
 @Component({
@@ -15,7 +15,7 @@ export class BoardComponent implements OnInit {
   robotPosition$: Observable<number>;
   robotDirection$: Observable<string>;
   fossilPosition$: Observable<number>;
-  gameData$: Observable<GameData>;
+  gameData$: Observable<RobotData>;
 
   fossilPosition: number = 0;
   squares: null[];
@@ -43,16 +43,16 @@ export class BoardComponent implements OnInit {
       this.robotDirection$
     ]).pipe(
       map(gameData => {
-        const [robotPosition, robotDirection] = gameData;
+        const [position, direction] = gameData;
 
-        if (robotPosition === this.fossilPosition) {
+        if (position === this.fossilPosition) {
           this.gameService.updateScore();
-          this.gameService.updateFossil(robotPosition);
+          this.gameService.updateFossil(position);
         }
 
         return {
-          robotPosition,
-          robotDirection,
+          position,
+          direction,
         };
       }),
       // tap(data => console.log(data))

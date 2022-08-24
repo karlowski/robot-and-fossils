@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GameData } from "@app/board/interfaces/board.interface";
+import { RobotData } from "@app/board/interfaces/robot.interface";
 import { InitialGameProperties } from "@app/core/enums/initial-properties.enum";
 
 @Component({
@@ -10,7 +10,7 @@ import { InitialGameProperties } from "@app/core/enums/initial-properties.enum";
 export class LandscapeComponent implements OnInit {
 
   @Input() squares: null[];
-  @Input() robotState: GameData;
+  @Input() robotState: RobotData;
   @Input() fossilPosition: number | null;
 
   robotSpriteUrl: string;

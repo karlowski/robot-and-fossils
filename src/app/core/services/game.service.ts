@@ -4,7 +4,7 @@ import { BehaviorSubject, finalize, map, Observable, takeWhile, timer } from "rx
 import { InitialGameProperties } from "../enums/initial-properties.enum";
 import { FossilService } from "./fossil.service";
 import { RobotService } from "./robot.service";
-import {RobotDirections} from "@app/core/enums/robot-directions.enum";
+import { RobotDirections } from "@app/core/enums/robot-directions.enum";
 
 @Injectable({ providedIn: "root" })
 export class GameService {
