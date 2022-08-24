@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-square',
+  selector: 'rbt-square',
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.scss']
 })

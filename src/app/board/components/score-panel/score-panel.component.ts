@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-score-panel',
+  selector: 'rbt-score-panel',
   templateUrl: './score-panel.component.html',
   styleUrls: ['./score-panel.component.scss']
 })

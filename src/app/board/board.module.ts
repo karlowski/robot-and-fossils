@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 
 import { BoardComponent } from "./board.component";
-import { SquareComponent } from "./components/square/square.component";
-import { PlayerPanelComponent } from "./components/player-panel/player-panel.component";
+import { SquareComponent } from "./components/landscape/square/square.component";
+import { ControlsPanelComponent } from "./components/controls-panel/controls-panel.component";
 import { TimerPipe } from './pipes/timer.pipe';
 import { ScorePanelComponent } from './components/score-panel/score-panel.component';
+import { LandscapeComponent } from './components/landscape/landscape.component';
 
 @NgModule({
   declarations: [
     BoardComponent,
     SquareComponent,
-    PlayerPanelComponent,
+    ControlsPanelComponent,
     TimerPipe,
-    ScorePanelComponent
+    ScorePanelComponent,
+    LandscapeComponent
   ],
   imports: [CommonModule],
   exports: [

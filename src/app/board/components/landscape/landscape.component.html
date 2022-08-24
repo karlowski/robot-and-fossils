@@ -1,0 +1,9 @@
+<div class="squares">
+  <rbt-square *ngFor="let square of squares; index as i"
+              [isRobotHere]="robotState.position === i"
+              [isFossilHere]="fossilPosition === i"
+              [robotDirection]="robotState.direction"
+              [robotSprite]="robotSpriteUrl"
+              [fossilSprite]="fossilSpriteUrl">
+  </rbt-square>
+</div>

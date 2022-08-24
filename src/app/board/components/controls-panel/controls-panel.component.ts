@@ -2,11 +2,11 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-player-panel',
-  templateUrl: './player-panel.component.html',
-  styleUrls: ['./player-panel.component.scss']
+  selector: 'rbt-controls-panel',
+  templateUrl: './controls-panel.component.html',
+  styleUrls: ['./controls-panel.component.scss']
 })
-export class PlayerPanelComponent implements OnInit {
+export class ControlsPanelComponent implements OnInit {
 
   @Input() timeLeft: Observable<number> = new Observable();
   @Input() score: Observable<number> = new Observable();
