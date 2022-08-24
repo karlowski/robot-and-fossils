@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 
 import { BoardComponent } from "./board.component";
-import { SquareComponent } from "./components/square/square.component";
+import { SquareComponent } from "./components/landscape/square/square.component";
 import { PlayerPanelComponent } from "./components/player-panel/player-panel.component";
 import { TimerPipe } from './pipes/timer.pipe';
 import { ScorePanelComponent } from './components/score-panel/score-panel.component';
+import { LandscapeComponent } from './components/landscape/landscape.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ScorePanelComponent } from './components/score-panel/score-panel.compon
     SquareComponent,
     PlayerPanelComponent,
     TimerPipe,
-    ScorePanelComponent
+    ScorePanelComponent,
+    LandscapeComponent
   ],
   imports: [CommonModule],
   exports: [

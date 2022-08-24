@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-player-panel',
+  selector: 'rbt-player-panel',
   templateUrl: './player-panel.component.html',
   styleUrls: ['./player-panel.component.scss']
 })

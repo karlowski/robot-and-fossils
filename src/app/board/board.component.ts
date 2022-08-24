@@ -6,7 +6,7 @@ import { GameData } from './interfaces/board.interface';
 import { InitialGameProperties } from '@app/core/enums/initial-properties.enum';
 
 @Component({
-  selector: 'app-board',
+  selector: 'rbt-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
