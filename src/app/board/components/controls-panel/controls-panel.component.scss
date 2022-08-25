@@ -55,25 +55,6 @@
         }
       }
     }
-
-    .game-over-panel {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      margin: 5px 15px;
-
-      .start-button {
-        font-size: 22px;
-        color: white;
-        cursor: pointer;
-      }
-
-      p {
-        color: white;
-        margin: 5px;
-      }
-    }
   }
 }
 

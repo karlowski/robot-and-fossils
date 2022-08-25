@@ -18,4 +18,8 @@
                         (started)="start()">
     </rbt-controls-panel>
   </div>
+
+  <ng-container  *ngIf="!isGameOn && isGameOver">
+    <rbt-game-over [isActive]="isGameOver" (startedAgain)="start()"></rbt-game-over>
+  </ng-container>
 </div>

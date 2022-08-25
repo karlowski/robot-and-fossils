@@ -7,6 +7,7 @@ import { ControlsPanelComponent } from "./components/controls-panel/controls-pan
 import { TimerPipe } from './pipes/timer.pipe';
 import { ScorePanelComponent } from './components/score-panel/score-panel.component';
 import { LandscapeComponent } from './components/landscape/landscape.component';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LandscapeComponent } from './components/landscape/landscape.component';
     ControlsPanelComponent,
     TimerPipe,
     ScorePanelComponent,
-    LandscapeComponent
+    LandscapeComponent,
+    GameOverComponent
   ],
   imports: [CommonModule],
   exports: [
