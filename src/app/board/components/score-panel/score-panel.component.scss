@@ -9,7 +9,7 @@
   justify-content: space-evenly;
   border: solid #000000 5px;
   background-color: #2f2c2c;
-  box-shadow: 0 0.1vw 0.5vw 0.1vw black;
+  box-shadow: 0 0.1vw 0.5vw 0.1vw variables.$shadowLight;
 
   @media screen and (max-width: variables.$mobile) {
     width: 99vw;
