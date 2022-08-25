@@ -7,5 +7,5 @@
   background-image: url(variables.$landscapeImage);
   background-size: 100% 100%;
   margin: 0 auto;
-  box-shadow: 0 0.5vw 0.5vw 0.5vw black;
+  box-shadow: 0 0.1vw 0.5vw 0.1vw variables.$shadowDeep;
 }
