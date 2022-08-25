@@ -9,10 +9,5 @@
     <div class="buttons-panel" *ngIf="!isPlaying && !isGameOver">
       <button class="start-button" (click)="onStart()">START</button>
     </div>
-
-    <div class="game-over-panel" *ngIf="!isPlaying && isGameOver">
-      <p>GAME OVER</p>
-      <button class="start-button" (click)="onStart()">AGAIN?</button>
-    </div>
   </div>
 </div>
