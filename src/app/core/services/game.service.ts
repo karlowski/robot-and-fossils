@@ -14,8 +14,13 @@ export class GameService {
 
   timer: Observable<void> = timer(0, InitialGameProperties.Tick).pipe(
     takeWhile(() => !!this.currentTime && !this.isGameOver),
-    map(() => this.timerTick()),
-    finalize(() => this.endRound())
+    map(() => {
+      this.timerTick();
+      if (!this._timeLeft.getValue()) {
+        this.endRound();
+      }
+    }),
+    // finalize(() => this.endRound())
   );
 
   private _score = new BehaviorSubject<number>(InitialGameProperties.Score);
@@ -37,9 +42,7 @@ export class GameService {
   }
 
   startNewRound(): void {
-    if (this.score) {
-      this._score.next(InitialGameProperties.Score);
-    }
+    this._timeLeft.next(InitialGameProperties.Time);
 
     if (this.isGameOver) {
       this.randomizeRobotEmplacement();
@@ -97,7 +100,6 @@ export class GameService {
   endRound(): void {
     this.isGameRunning = false;
     this.isGameOver = true;
-    this._timeLeft.next(InitialGameProperties.Time);
   }
 
   randomizeRobotEmplacement(): void {
