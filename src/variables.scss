@@ -2,14 +2,23 @@
 $landscapeImage: '/assets/terrain.png';
 $panelImage: '/assets/control-panel.gif';
 
-// buttons...
+// background colors...
+$backgroundColorPanel: #2f2c2c;
+
+// buttons images...
 $turnLeftButton: '/assets/left-arrow.png';
 $turnRightButton: '/assets/right-arrow.png';
 $moveButton: '/assets/forward-arrow.png';
 
+// buttons colors...
+$buttonColorHover: #b4b4b4;
+
 // breakpoints...
-$mobile: 600px;
+$mobileBP: 600px;
 
 // shadows...
-$shadowDeep: black;
-$shadowLight: #242424;
+$shadowColorDeep: black;
+$shadowColorLight: #242424;
+
+// borders...
+$borderColor: black;
