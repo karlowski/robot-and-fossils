@@ -26,8 +26,7 @@ export class BoardComponent implements OnInit {
   constructor(
     private gameService: GameService
   ) {
-    this.gameService.randomizeRobotEmplacement();
-    this.gameService.updateFossil();
+    this.gameService.resetFossil();
     this.squares = new Array(25);
     this.robotSpriteUrl = InitialGameProperties.RobotSprite;
     this.fossilSpriteUrl = InitialGameProperties.FossilSprite;
@@ -47,7 +46,7 @@ export class BoardComponent implements OnInit {
 
         if (position === this.fossilPosition) {
           this.gameService.updateScore();
-          this.gameService.updateFossil(position);
+          this.gameService.resetFossil(position);
         }
 
         return {

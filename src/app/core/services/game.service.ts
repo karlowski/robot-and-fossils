@@ -41,11 +41,12 @@ export class GameService {
   }
 
   startNewRound(): void {
+    this.resetRobot();
     this._timeLeft.next(InitialGameProperties.Time);
 
     if (this.isGameOver) {
-      this.randomizeRobotEmplacement();
-      this.fossilService.throwNewFossil();
+      this.resetScore();
+      this.resetFossil();
     }
 
     this.isGameOver = false;
@@ -74,7 +75,11 @@ export class GameService {
     this.gainScorePoint(currentScore + 1);
   }
 
-  updateFossil(robotPosition?: number) {
+  resetScore(): void {
+    this._score.next(0);
+  }
+
+  resetFossil(robotPosition?: number) {
     this.fossilService.throwNewFossil(robotPosition);
   }
 
@@ -101,7 +106,7 @@ export class GameService {
     this.isGameOver = true;
   }
 
-  randomizeRobotEmplacement(): void {
+  resetRobot(): void {
     this.robotService.robotRandomizer();
   }
 
