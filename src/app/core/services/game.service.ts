@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, finalize, map, Observable, takeWhile, timer } from "rxjs";
+import { BehaviorSubject, map, Observable, takeWhile, timer } from "rxjs";
 
 import { InitialGameProperties } from "../enums/initial-properties.enum";
+import { RobotDirections } from "../enums/robot-directions.enum";
 import { FossilService } from "./fossil.service";
 import { RobotService } from "./robot.service";
-import { RobotDirections } from "@app/core/enums/robot-directions.enum";
 
 @Injectable({ providedIn: "root" })
 export class GameService {
@@ -19,8 +19,7 @@ export class GameService {
       if (!this._timeLeft.getValue()) {
         this.endRound();
       }
-    }),
-    // finalize(() => this.endRound())
+    })
   );
 
   private _score = new BehaviorSubject<number>(InitialGameProperties.Score);

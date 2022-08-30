@@ -3,7 +3,7 @@ import { combineLatest, map, Observable, tap } from 'rxjs';
 
 import { GameService } from '../core/services/game.service';
 import { RobotData } from './interfaces/robot.interface';
-import { InitialGameProperties } from '@app/core/enums/initial-properties.enum';
+import { InitialGameProperties } from '../core/enums/initial-properties.enum';
 
 @Component({
   selector: 'rbt-board',

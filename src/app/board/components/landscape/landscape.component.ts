@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RobotData } from "@app/board/interfaces/robot.interface";
-import { InitialGameProperties } from "@app/core/enums/initial-properties.enum";
+
+import { RobotData } from "../../../board/interfaces/robot.interface";
+import { InitialGameProperties } from "../../../core/enums/initial-properties.enum";
 
 @Component({
   selector: 'rbt-landscape',
