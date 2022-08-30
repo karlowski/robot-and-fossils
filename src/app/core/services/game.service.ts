@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, finalize, map, Observable, takeWhile, timer } from "rxjs";
+import { BehaviorSubject, map, Observable, takeWhile, timer } from "rxjs";
 
 import { InitialGameProperties } from "../enums/initial-properties.enum";
+import { RobotDirections } from "../enums/robot-directions.enum";
 import { FossilService } from "./fossil.service";
 import { RobotService } from "./robot.service";
-import { RobotDirections } from "@app/core/enums/robot-directions.enum";
 
 @Injectable({ providedIn: "root" })
 export class GameService {
@@ -14,8 +14,12 @@ export class GameService {
 
   timer: Observable<void> = timer(0, InitialGameProperties.Tick).pipe(
     takeWhile(() => !!this.currentTime && !this.isGameOver),
-    map(() => this.timerTick()),
-    finalize(() => this.endRound())
+    map(() => {
+      this.timerTick();
+      if (!this._timeLeft.getValue()) {
+        this.endRound();
+      }
+    })
   );
 
   private _score = new BehaviorSubject<number>(InitialGameProperties.Score);
@@ -37,9 +41,7 @@ export class GameService {
   }
 
   startNewRound(): void {
-    if (this.score) {
-      this._score.next(InitialGameProperties.Score);
-    }
+    this._timeLeft.next(InitialGameProperties.Time);
 
     if (this.isGameOver) {
       this.randomizeRobotEmplacement();
@@ -97,7 +99,6 @@ export class GameService {
   endRound(): void {
     this.isGameRunning = false;
     this.isGameOver = true;
-    this._timeLeft.next(InitialGameProperties.Time);
   }
 
   randomizeRobotEmplacement(): void {

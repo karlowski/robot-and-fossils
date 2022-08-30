@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+
 import { InitialGameProperties } from "../enums/initial-properties.enum";
 import { RobotDirections } from "../enums/robot-directions.enum";
 
