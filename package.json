@@ -7,7 +7,9 @@
     "build": "ng build",
     "build:prod": "ng build --configuration production --base-href https://karlowski.github.io/robot-game-angular/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "deploy": "ng deploy --base-href=/robot-game-angular/"
   },
   "private": true,
   "dependencies": {
