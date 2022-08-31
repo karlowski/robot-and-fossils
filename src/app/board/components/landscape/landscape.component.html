@@ -1,8 +1,9 @@
-<div class="landscape-table">
-    <app-square *ngFor="let square of squares; index as i"
-                [isRobotHere]="checkRobotPosition(i, robotPosition)"
-                [isFossilHere]="checkFossilPosition(i, fossilPosition)"
-                [robotSprite]="robotSprite"
-                [fossilSprite]="fossilSprite">
-    </app-square>
+<div class="squares">
+  <rbt-square *ngFor="let square of squares; index as i"
+              [isRobotHere]="robotState.position === i"
+              [isFossilHere]="fossilPosition === i"
+              [robotDirection]="robotState.direction"
+              [robotSprite]="robotSpriteUrl"
+              [fossilSprite]="fossilSpriteUrl">
+  </rbt-square>
 </div>

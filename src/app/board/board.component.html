@@ -1,45 +1,25 @@
 <div class="main-board-wrapper">
-  <div class="main-board" *ngIf="mainGameData$ | async as gameState">
-    <div class="squares">
-      <app-square *ngFor="let square of squares; index as i"
-                  [isRobotHere]="gameState.robotPosition === i"
-                  [isFossilHere]="(fossilPosition$ | async) === i"
-                  [robotDirection]="gameState.robotDirection"
-                  [robotSprite]="robotSpriteUrl"
-                  [fossilSprite]="fossilSpriteUrl">
-      </app-square>
-    </div>
-    <div class="panel-wrapper">
-      <div class="time-score-mobile">
-        <div>
-          <p>Time:</p>
-          <p>{{ timeLeft | async | timing }}</p>
-        </div>
-        <div>
-          <p>Score:</p>
-          <p>{{ score | async }}</p>
-        </div>
-      </div>
-
-      <div class="time-panel">
-        <p *ngIf="!isGameOn">Time:</p>
-        <p>{{ timeLeft | async | timing }}</p>
-      </div>
-
-      <app-player-panel [timeLeft]="timeLeft"
+  <div class="main-board" *ngIf="gameData$ | async as robotState">
+    <rbt-score-panel [isGameOn]="isGameOn"
+                     [timeLeft]="timeLeft"
+                     [score]="score">
+    </rbt-score-panel>
+    <rbt-landscape [squares]="squares"
+                   [robotState]="robotState"
+                   [fossilPosition]="fossilPosition$ | async">
+    </rbt-landscape>
+    <rbt-controls-panel [timeLeft]="timeLeft"
                         [isPlaying]="isGameOn"
                         [isGameOver]="isGameOver"
 
-                        (turnedLeft)="onTurnLeft(gameState.robotDirection)" 
-                        (moved)="onMove(gameState.robotDirection, gameState.robotPosition)" 
-                        (turnedRight)="onTurnRight(gameState.robotDirection)"
+                        (turnedLeft)="onTurnLeft(robotState.direction)"
+                        (moved)="onMove(robotState.direction, robotState.position)"
+                        (turnedRight)="onTurnRight(robotState.direction)"
                         (started)="start()">
-      </app-player-panel>
-
-      <div class="score-panel">
-        <p *ngIf="!isGameOn">Score:</p>
-        <p>{{ score | async }}</p>
-      </div>
-    </div>
+    </rbt-controls-panel>
   </div>
+
+  <ng-container  *ngIf="!isGameOn && isGameOver">
+    <rbt-game-over [isActive]="isGameOver" (startedAgain)="start()"></rbt-game-over>
+  </ng-container>
 </div>

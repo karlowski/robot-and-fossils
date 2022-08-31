@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { combineLatest, map, Observable, tap } from 'rxjs';
 
 import { GameService } from '../core/services/game.service';
-import { IGameData } from './interfaces/board.interface';
-import { GameProperties } from '@app/core/models/initial-properties.enum';
+import { RobotData } from './interfaces/robot.interface';
+import { InitialGameProperties } from '../core/enums/initial-properties.enum';
 
 @Component({
-  selector: 'app-board',
+  selector: 'rbt-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
@@ -15,7 +15,7 @@ export class BoardComponent implements OnInit {
   robotPosition$: Observable<number>;
   robotDirection$: Observable<string>;
   fossilPosition$: Observable<number>;
-  mainGameData$: Observable<IGameData>;
+  gameData$: Observable<RobotData>;
 
   fossilPosition: number = 0;
   squares: null[];
@@ -26,11 +26,10 @@ export class BoardComponent implements OnInit {
   constructor(
     private gameService: GameService
   ) {
-    this.gameService.randomizeRobotEmplacement();
-    this.gameService.updateFossil();
+    this.gameService.resetFossil();
     this.squares = new Array(25);
-    this.robotSpriteUrl = GameProperties.robotSprite;
-    this.fossilSpriteUrl = GameProperties.fossilSprite;
+    this.robotSpriteUrl = InitialGameProperties.RobotSprite;
+    this.fossilSpriteUrl = InitialGameProperties.FossilSprite;
 
     this.robotPosition$ = this.gameService.robotLocation;
     this.robotDirection$ = this.gameService.robotDirection;
@@ -38,21 +37,21 @@ export class BoardComponent implements OnInit {
       tap(position => this.fossilPosition = position)
     );
 
-    this.mainGameData$ = combineLatest([
+    this.gameData$ = combineLatest([
       this.robotPosition$,
       this.robotDirection$
     ]).pipe(
       map(gameData => {
-        const [robotPosition, robotDirection] = gameData;
+        const [position, direction] = gameData;
 
-        if (robotPosition === this.fossilPosition) {
+        if (position === this.fossilPosition) {
           this.gameService.updateScore();
-          this.gameService.updateFossil(robotPosition);
+          this.gameService.resetFossil(position);
         }
-        
+
         return {
-          robotPosition,
-          robotDirection,
+          position,
+          direction,
         };
       }),
       // tap(data => console.log(data))
@@ -87,7 +86,6 @@ export class BoardComponent implements OnInit {
 
   onTurnRight(direction: any): void {
     const isTurnedRight = true;
-
     this.gameService.updateRobotDirection(direction, isTurnedRight);
   }
 
