@@ -1,12 +1,15 @@
 {
   "name": "robot-game-angular",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --base-href https://karlowski.github.io/robot-game-angular/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "deploy": "ng deploy --base-href=/robot-game-angular/"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +31,7 @@
     "@angular/compiler-cli": "^16.2.11",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.3",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
