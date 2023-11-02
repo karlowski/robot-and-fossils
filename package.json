@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
-    "deploy": "ng deploy --base-href=/robot-and-fossils/ --no-silent"
+    "deploy": "ng deploy --base-href https://karlowski.github.io/robot-and-fossils/ --no-silent"
   },
   "private": true,
   "dependencies": {

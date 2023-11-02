@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(variables.$panelImage);
+  background-image: url('/assets/control-panel.gif');
   background-size: 100% 100%;
   box-shadow: 0 0.1vw 0.5vw 0.1vw variables.$shadowColorLight;
 
@@ -53,13 +53,13 @@
         }
 
         &.left {
-          background-image: url(variables.$turnLeftButton);
+          background-image: url('/assets/left-arrow.png');
         }
         &.forward {
-          background-image: url(variables.$moveButton);
+          background-image: url('/assets/forward-arrow.png');
         }
         &.right {
-          background-image: url(variables.$turnRightButton);
+          background-image: url('/assets/right-arrow.png');
         }
 
         @media screen and (max-width: variables.$mobileBP) {
