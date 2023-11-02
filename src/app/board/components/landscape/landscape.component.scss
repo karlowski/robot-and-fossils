@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: fit-content;
-  background-image: url('/assets/terrain.png');
+  background-image: url('../../../../assets/terrain.png');
   background-size: 100% 100%;
   margin: 0 auto;
   box-shadow: 0 0.1vw 0.5vw 0.1vw variables.$shadowColorDeep;
