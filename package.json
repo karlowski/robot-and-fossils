@@ -1,5 +1,5 @@
 {
-  "name": "robot-game-angular",
+  "name": "robot-and-fossils",
   "version": "0.2.0",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
-    "deploy": "ng deploy --base-href=/robot-game-angular/"
+    "deploy": "ng deploy --base-href=/robot-and-fossils/"
   },
   "private": true,
   "dependencies": {

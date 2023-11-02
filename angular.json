@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "robot-game-angular": {
+    "robot-and-fossils": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "robot-game-angular:build:production"
+              "browserTarget": "robot-and-fossils:build:production"
             },
             "development": {
-              "browserTarget": "robot-game-angular:build:development"
+              "browserTarget": "robot-and-fossils:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "robot-game-angular:build"
+            "browserTarget": "robot-and-fossils:build"
           }
         },
         "test": {
